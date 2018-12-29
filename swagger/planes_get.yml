@@ -1,0 +1,79 @@
+Returns the list of plane entries.
+---
+tags:
+  - plane
+parameters:
+  - name: pagination
+    in: query
+    description: Select pagination
+    required: false
+    type: boolean
+  - name: page
+    in: query
+    description: Specify page number to return if pagination is selected
+    required: false
+    type: int
+  - name: limit
+    in: query
+    description: Specify number of page entries per page if pagination is selected
+    required: false
+    type: int
+
+responses:
+  200:
+    description: The response will have a status code of '200' and a body that includes the list of plane entires.
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Planes'
+    examples:
+      responses:
+        {
+          "planes": [
+            [
+              {
+                "datetime": "2016-10-14T12:00:00-05:00",
+                "description": "Cesna 120",
+                "elevation": 600,
+                "id": "1",
+                "latitude": 43.559112,
+                "longitude": -85.286693,
+                "unique_id": "12016-10-14T12:00:00-05:00"
+              },
+              {
+                "datetime": "2016-10-12T12:00:00-05:00",
+                "description": "DC-6 Twin Otter",
+                "elevation": 500,
+                "id": "2",
+                "latitude": 43.459112,
+                "longitude": -80.386693,
+                "unique_id": "22016-10-12T12:00:00-05:00"
+              }
+            ],
+            {
+              "page": 2,
+              "pages": 7,
+              "perPage": 2,
+              "total": 14
+            }
+          ]
+        }
+definitions:
+  Plane:
+    type: object
+    properties:
+      id:
+        type: string
+      description:
+        type: string
+      datetime:
+        type: string
+      longitude:
+        type: float
+      latitude:
+        type: float
+      elevation:
+        type: float
+      unique_id:
+        type: string
+

@@ -1,0 +1,46 @@
+Update a plane date/time entry with the request body.
+---
+tags:
+  - plane
+parameters:
+  - name: unique_id
+    in: path
+    description: Unique id (id plus datetime fields)
+    required: true
+    type: string
+  - name : plane
+    in: body
+    required: true
+    schema:
+      $ref: '#/definitions/Plane'
+    desription: id, description, datetime, latitide, longitude, and elevation required
+
+responses:
+  201:
+    description: The response status code is 201 if entry is successfully added.
+  400:
+    description: |
+      Invalid request format - Invalid plane object passed in request.
+
+      Invalid data type/format - When the request is the wrong data type or format.
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+    examples:
+      Invalid object:
+        {"error": "Invalid plane object passed in request"}
+      Invalid data type:
+        {"error": "Invalid data type in request"}
+404:
+    description: Invalid request data - when the unique_id does not exist.
+
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+    examples:
+      Invalid request data:
+        {"error": "Plane does not exist for date/time"}

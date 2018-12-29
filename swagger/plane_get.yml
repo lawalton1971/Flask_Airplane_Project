@@ -1,0 +1,59 @@
+Returns the list of one plane entry.
+---
+tags:
+  - plane
+parameters:
+  - name: unique_id
+    in: path
+    description: Unique id (id plus datetime fields)
+    required: true
+    type: string
+
+responses:
+  200:
+    description: The response will have a status code of '200' and a body that includes one plane entry.
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Plane'
+    examples:
+      responses:
+        {
+          "datetime": "2016-10-14T12:00:00-05:00",
+          "description": "Cesna 120",
+          "elevation": 600,
+          "id": "1",
+          "latitude": 43.559112,
+          "longitude": -85.286693,
+          "unique_id": "12016-10-14T12:00:00-05:00"
+        }
+  400:
+    description: Invalid request data - when the unique_id does not exist.
+
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+    examples:
+      Invalid request data:
+        {"error": "Plane does not exist for date/time"}
+
+definitions:
+  Plane:
+    type: object
+    properties:
+      id:
+        type: string
+      description:
+        type: string
+      datetime:
+        type: string
+      longitude:
+        type: float
+      latitude:
+        type: float
+      elevation:
+        type: float
+      unique_id:
+        type: string

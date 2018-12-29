@@ -1,0 +1,34 @@
+Add a plane date/time entry with the request body.
+---
+tags:
+  - plane
+parameters:
+  - name : plane
+    in: body
+    required: true
+    schema:
+      $ref: '#/definitions/Plane'
+    desription: id, description, datetime, latitide, longitude, and elevation required
+
+responses:
+  201:
+    description: The response status code is 201 if entry is successfully added.
+  400:
+    description: |
+      Duplicate request data - Plane already exists for same date/time.
+
+      Invalid request format - Invalid plane object passed in request.
+
+      Missing data type/format - When the request is the wrong data type or format.
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+    examples:
+      Invalid object:
+        {"error": "Invalid plane object passed in request"}
+      Duplicate request data:
+        {"error": "Plane already exists for same date/time"}
+      Invalid data type:
+        {"error": "Invalid data type in request"}

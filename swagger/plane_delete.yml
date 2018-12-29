@@ -1,0 +1,26 @@
+Deletes one plane entry.
+---
+tags:
+  - plane
+parameters:
+  - name: unique_id
+    in: path
+    description: Unique id (id plus datetime fields)
+    required: true
+    type: string
+
+responses:
+  204:
+    description: The response will have a status code of '204' if entry is successfully deleted.
+
+  404:
+    description: Invalid request data - when the unique_id does not exist.
+
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+    examples:
+      Invalid request data:
+        {"error": "Plane does not exist for date/time"}
